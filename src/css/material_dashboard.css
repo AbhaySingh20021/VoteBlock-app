@@ -1,18 +1,4 @@
-/*!
 
- =========================================================
- * Material Dashboard - v2.1.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/material-dashboard
- * Copyright 2020 Creative Tim (http://www.creative-tim.com)
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
- */
-/*     brand Colors              */
 .card {
   font-size: .875rem;
 }
@@ -56,9 +42,12 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
   text-align: left;
-  background-color: #fafafa;
+  
+
+  /* Chrome 10-25, Safari 5.1-6 */
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 [tabindex="-1"]:focus {
@@ -2979,15 +2968,15 @@ fieldset:disabled a.btn {
 
 .btn-info {
   color: #ffffff;
-  background-color: #00bcd4;
-  border-color: #00bcd4;
+  background-color: #256D85;
+  border-color: #256D85;
   box-shadow: none;
 }
 
 .btn-info:hover {
   color: #ffffff;
-  background-color: #009aae;
-  border-color: #008fa1;
+  background-color: #256D85;
+  border-color: #256D85;
 }
 
 .btn-info:focus,
@@ -2998,22 +2987,22 @@ fieldset:disabled a.btn {
 .btn-info.disabled,
 .btn-info:disabled {
   color: #ffffff;
-  background-color: #00bcd4;
-  border-color: #00bcd4;
+  background-color: #256D85;
+  border-color: #256D85;
 }
 
 .btn-info:not(:disabled):not(.disabled):active,
 .btn-info:not(:disabled):not(.disabled).active,
 .show>.btn-info.dropdown-toggle {
   color: #ffffff;
-  background-color: #008fa1;
-  border-color: #008394;
+  background-color: #256D85;
+  border-color: #256D85;
 }
 
 .btn-info:not(:disabled):not(.disabled):active:focus,
 .btn-info:not(:disabled):not(.disabled).active:focus,
 .show>.btn-info.dropdown-toggle:focus {
-  box-shadow: none, 0 0 0 0.2rem rgba(0, 188, 212, 0.5);
+  box-shadow: none, 0 0 0 0.2rem #256D85;
 }
 
 .btn-warning {
@@ -14417,7 +14406,7 @@ h6,
 .footer-big h4 a,
 .media .media-heading,
 .media .media-heading a {
-  color: #3C4858;
+  color: white;
   text-decoration: none;
 }
 
@@ -15164,7 +15153,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   left: 0;
   z-index: 2;
   width: 260px;
-  background: #fff;
+  background: black;
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
@@ -15181,7 +15170,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-background-color="black"] {
-  background-color: #191919;
+  background-color: #fff4f4;
 }
 
 .sidebar .sidebar-wrapper {
@@ -15283,13 +15272,13 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a:hover,
 .sidebar .nav li .dropdown-menu a:focus,
 .sidebar .nav li.active>[data-toggle="collapse"] {
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: #256D85;
   color: #3C4858;
   box-shadow: none;
 }
 
 .sidebar .nav li.active>[data-toggle="collapse"] i {
-  color: #a9afbb;
+  color: #256D85;
 }
 
 .sidebar .nav li.active>a,
@@ -15338,7 +15327,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a {
   margin: 10px 15px 0;
   border-radius: 3px;
-  color: #3C4858;
+  color: white;
+  font-weight: 300px;
   padding-left: 10px;
   padding-right: 10px;
   text-transform: capitalize;
@@ -15465,12 +15455,12 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-color="azure"] li.active>a {
-  background-color: #00bcd4;
+  background-color: #256D85;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
 }
 
 .sidebar[data-color="green"] li.active>a {
-  background-color: #4caf50;
+  background-color:#00353b;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(76, 175, 80, 0.4);
 }
 
@@ -15570,8 +15560,8 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .main-panel>.content {
-  margin-top: 70px;
-  padding: 30px 15px;
+  
+  padding: 10px 15px;
   min-height: calc(100vh - 123px);
 }
 
@@ -17526,7 +17516,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
 .card.bg-info,
 .card.card-rotate.bg-info .front,
 .card.card-rotate.bg-info .back {
-  background: linear-gradient(60deg, #26c6da, #00acc1);
+  background: linear-gradient(60deg, #06283D, #00acc1);
 }
 
 .card .card-header-success .card-icon,
@@ -17535,7 +17525,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
 .card.bg-success,
 .card.card-rotate.bg-success .front,
 .card.card-rotate.bg-success .back {
-  background: linear-gradient(60deg, #66bb6a, #43a047);
+  background:#004b55;
 }
 
 .card .card-header-warning .card-icon,
@@ -19751,4 +19741,22 @@ Copyright (c) 2015 Daniel Eden
   .sidebar .navbar-form {
     display: none !important;
   }
+}
+.main-panel {
+  margin-top: 50px;
+}
+.card {
+ background-color: #DFF6FF;
+
+}
+.card .card-body {
+  color: #000000 !important;
+}
+
+.wrapper {
+  background: #256D85;
+}
+
+.card .card-body {
+  font-weight: 600;
 }

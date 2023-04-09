@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Sidebar from '../components/Sidebar';
-import Contest from '../contracts/Contest.json'
-import Web3 from 'web3';
 import { useNavigate } from 'react-router-dom';
+import loadWeb3 from '../context/Ethereum';
 import CandProfile from '../components/CandProfile'
 import '../css/profile.css';
 
 
-
-
 // TODO:
 // 1.check for current phase if 'final stage' :
-//     enable voter to vote
+//     enable voter to vote using candidateData to display
 
-const Dashboard = (account) => {
+const Dashboard = ({ account }) => {
   const [candidateData, setCandidateData] = useState([])
   const navigate = useNavigate()
+  const [currentPhase, setCurrentPhase] = useState('')
+  const [hasVoted, setHasVoted] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem("currentUserEmail") === '') {
@@ -23,15 +22,8 @@ const Dashboard = (account) => {
       navigate('/login')
     }
 
-
     (async () => {
-      const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-      const netID = await web3.eth.net.getId();
-      const deployedNetwork = Contest.networks[netID]
-      const contest = new web3.eth.Contract(
-        Contest.abi,
-        deployedNetwork.address
-      )
+      const contest = await loadWeb3()
       const candidateCount = await contest.methods.contestantsCount().call()
       for (var i = 1; i <= candidateCount; i++) {
         const candidate = await contest.methods.contestants(i).call()
@@ -44,15 +36,14 @@ const Dashboard = (account) => {
           voteCount: candidate.voteCount,
         }])
       }
-
+      const phase = await contest.methods.currentPhase().call()
+      setCurrentPhase(phase)
+      const currentVoter = await contest.methods.voters(account).call()
+      setHasVoted(currentVoter.hasVoted)
     })()
 
   }, [])
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  }
 
   return (
     <div className="wrapper ">
@@ -60,58 +51,39 @@ const Dashboard = (account) => {
       <div className="main-panel">
         <div className="content" style={{ marginTop: "20px !important" }}>
           <div className="container" style={{ width: "850px" }}>
-          <div className="minhold">
-          
-
-             {candidateData.map((candidate, idx) => (
-               <div className='containerSide' key={idx}>
-                   <CandProfile
-                    key = {idx}
-                    id= {candidate.id}
-                    name = {candidate.name}
-                    age = {candidate.age}
-                    party = {candidate.party}
-                    qualification= {candidate.qualification} 
-                    votes = {candidate.voteCount}
-                    account = {account} />
-                   </div>
-              ))}
-              
+            {currentPhase === 'registration' && (
+              <h3 style={{ color: 'white' }}>Registration is still going!!!</h3>
+            )}
+            {currentPhase === 'voting' && (
+              <div className="card">
+            <div className="card-header card-header-info">
+              <h4 className="card-title">Vote</h4>
+            </div>
+              <div className="minhold">
+                {candidateData.map((candidate, idx) => (
+                  <div className='containerSide' key={idx}>
+                    <CandProfile
+                      key={idx}
+                      id={candidate.id}
+                      name={candidate.name}
+                      age={candidate.age}
+                      party={candidate.party}
+                      qualification={candidate.qualification}
+                      votes={candidate.voteCount}
+                      account={account} />
+                  </div>
+                ))}
               </div>
-
-
-
-
-
-
-
-
-
-            {/* <div>
-              {candidateData.map((candidate, idx) => (
-                <div key={idx}>
-                  <p>{candidate.id}</p>
-                  <p>{candidate.name}</p>
-                  <p>{candidate.age}</p>
-                  <p>{candidate.party}</p>
-                  <p>{candidate.qualification}</p>
-                  <p>{candidate.voteCount}</p>
-                </div>
-              ))}
-            </div> */}
-            
-            {/* <div>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="contestantSelect">Select Contestant : </label>
-                  <button type="submit" className="btn btn-info">Cast your vote</button>
-                </div>
-              </form>
-            </div> */}
+              </div>
+            )}
+            {currentPhase === 'results' && (
+              <h3 style={{ color: 'white' }}>Results are out!!</h3>
+            )}
           </div>
         </div>
       </div>
     </div>
+
   )
 }
 

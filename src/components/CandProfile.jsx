@@ -2,6 +2,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import Contest from '../contracts/Contest.json'
+import loadWeb3 from '../context/Ethereum';
+
 
 
 
@@ -9,39 +11,46 @@ import Contest from '../contracts/Contest.json'
 
 const candProfile = ({id, name, age, qualification, party, votes, account }) => {
     const [voteID, setVoteID] =  useState(null);
-
-
-  
-
-
-    
-
+	const [voted, setvoted] =  useState(null);
+	const [valid, setValid] = useState("Already voted");
     const handleSubmit = (event)=> {
        var id = event.target.id;
-
-
        console.log(id);
          (async () => {
-      const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-      const netID = await web3.eth.net.getId();
-      const deployedNetwork = Contest.networks[netID]
-      const contest = new web3.eth.Contract(
-        Contest.abi,
-        deployedNetwork.address
-      )
-        await contest.methods.vote(id).send({from: account.account})
+			const contest = await loadWeb3()
+        await contest.methods.vote(id).send({from: account})
+     
+
+    })()
+    }
+	useEffect(() => {
+		(async () => {
+			const contest = await loadWeb3()
+     var hasVoted =    await contest.methods.voterInfo(account).call();
+	 console.log("UseEffect")
+
+	 console.log(hasVoted)
+	 setvoted(hasVoted)
+	
+ setValid("Already Voted")
      
 
     })()
 
+	}, [] )
+  return ( 
 
-    }
-  return (
+	
 
-    <div className="frame">
+<div className="frame">
+
   <div className="center">
-    
-		<div className="profile">
+
+  {voted  ? (
+	<h2 style={{ margin: '4rem 15rem' }}>{valid}</h2>
+            ) : (
+				<main>
+                <div className="profile">
 			<div className="image">
 				<div className="circle-1"></div>
 				<div className="circle-2"></div>
@@ -55,6 +64,7 @@ const candProfile = ({id, name, age, qualification, party, votes, account }) => 
 			
 		
 		</div>
+
 		
 		<div className="stats">
 			<div className="box">
@@ -76,9 +86,15 @@ const candProfile = ({id, name, age, qualification, party, votes, account }) => 
         	<div className="actions">
 				<button id={id}  onClick={handleSubmit} className="btn">Vote</button>
 			</div>
+
+			</main>
+
+
+            )}
+		
   </div>
 </div>
-  )
+	  )
 }
 
 export default candProfile

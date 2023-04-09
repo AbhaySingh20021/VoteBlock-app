@@ -1,4 +1,4 @@
-//import "../css/registration_from.css";
+import "../css/registration_from.css";
 import img from "../assets/img/ev.png";
 import { useRef, useState } from "react";
 import FormInput from "../components/FormInput";
@@ -35,7 +35,7 @@ export const Login = () => {
     <div className="container">
       <div className="forms-container">
         <div className="signin-signup">
-          {error && <Alert variant="danger">{error}</Alert>}  
+          {error && <Alert variant="danger">{error}</Alert>}
           <form onSubmit={handleSubmit}>
             <h2 className="title">Sign in</h2>
             <FormInput
@@ -44,19 +44,19 @@ export const Login = () => {
               name="email_address"
               refer={emailRef}
             />
-            <FormInput 
-              type="password" 
-              placeholder="Password" 
-              name="password" 
+            <FormInput
+              type="password"
+              placeholder="Password"
+              name="password"
               refer={passwordRef}
             />
 
-            <input 
-              type="submit" 
-              value="Login" 
+            <input
+              type="submit"
+              value="Login"
               className="btn solid"
               disabled={loading}
-              />
+            />
           </form>
         </div>
       </div>
@@ -65,9 +65,9 @@ export const Login = () => {
         <div className="panel left-panel">
           <div className="content">
             <h3>New here ?</h3>
-            <p>If you haven't signed up , What are you waiting for ?</p>
+            <p>If you haven't made an account already, please Sign up!</p>
             <Link to="/register">
-              <button className="btn transparent" id="sign-up-btn">
+              <button className="btn" id="sign-up-btn">
                 Sign up
               </button>
             </Link>
